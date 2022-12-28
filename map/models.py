@@ -4,8 +4,8 @@ from django.db import models
 class Marker(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=120)
-    latitud = models.DecimalField(max_digits=4, decimal_places=4)
-    longitud = models.DecimalField(max_digits=4, decimal_places=4)
+    latitud = models.DecimalField(max_digits=6, decimal_places=4)
+    longitud = models.DecimalField(max_digits=6, decimal_places=4)
     icono = models.CharField(max_length=250)
     def __str__(self):
         return self.latitud
@@ -22,3 +22,6 @@ class Marker(models.Model):
 class Polygon(models.Model):
     nombre = models.CharField(max_length=50)
     coordenadas = models.JSONField()
+
+    def __str__(self):
+        return self.nombre
