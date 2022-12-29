@@ -7,8 +7,11 @@ from .models import Marker, Polygon
 
 # Create your views here.
 def mapView(request):
-    markers = Marker.objects.all()
-    polygons = Polygon.objects.all()
+    markers = list(Marker.objects.values())
+    for item in markers:
+        item['latitud'] = float(item['latitud'])
+        item['longitud'] = float(item['longitud'])
+    polygons = list(Polygon.objects.values())
     context = {
         'markers': markers,
         'polygons': polygons,
