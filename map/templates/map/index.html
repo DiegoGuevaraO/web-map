@@ -47,13 +47,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="">
-                            
+                        <form action="{% url 'map:addMarker' %}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre de marcador</label>
+                                <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" required name="nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripcion</label>
+                                <input type="text" class="form-control" id="descripcion" required name="descripcion">
+                                <div id="emailHelp" class="form-text">Descripcion corta del lugar a guardar</div>
+                                <input type="number" step="any" id="latitud" required name="latitud">
+                                <input type="number" step="any" id="longitud" required name="longitud">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
                 </div>

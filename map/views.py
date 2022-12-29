@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.views import generic
 
 from .models import Marker, Polygon
 
@@ -17,3 +16,14 @@ def mapView(request):
         'polygons': polygons,
     }
     return render(request, 'map/index.html', context)
+
+def addMarker(request):
+    name = request.POST.get('nombre', False)
+    desc = request.POST.get('descripcion', False)
+    lat = request.POST.get('latitud', False)
+    lng = request.POST.get('longitud', False)
+
+    marcador = Marker(nombre=name, descripcion=desc, latitud=lat, longitud=lng)
+    marcador.save()
+
+    return redirect(request.META['HTTP_REFERER'])

@@ -1,9 +1,12 @@
 for(let i = 0; i < markers.length; i++){
     var marker = L.marker([markers[i]['latitud'],markers[i]['longitud']], {icon: redIcon}).addTo(map);
-    marker.bindPopup("<h5>"+ markers[i]['nombre'] +"</h5><br><p>"+ markers[i]['descripcion'] +"</p>");
+    marker.bindPopup("<h5>"+ markers[i]['nombre'] +"</h5><br><h6>"+ markers[i]['descripcion'] +"</h6>");
 }
 
 var popup = L.popup();
+var currLatLng;
+var lat;
+var lng;
 
 function onMapClick(e) {
     popup
@@ -15,9 +18,15 @@ function onMapClick(e) {
             "</button>"
             )
         .openOn(map);
-    }
+    currLatLng = e.latlng;
 
+    lat = currLatLng['lat'].toFixed(4);
+    lng = currLatLng['lng'].toFixed(4);
+    document.getElementById("latitud").value = lat;
+    document.getElementById("longitud").value = lng;
+}
 map.on('click', onMapClick);
+
 
 geoLayer = L.geoJSON().addTo(map);
 

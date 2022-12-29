@@ -6,4 +6,5 @@ app_name = 'map'
 
 urlpatterns = [
     path('', views.mapView, name='map'),
+    path('agregar/', views.addMarker, name='addMarker')
 ]
