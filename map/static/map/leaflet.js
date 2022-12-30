@@ -1,6 +1,6 @@
 for(let i = 0; i < markers.length; i++){
     var marker = L.marker([markers[i]['latitud'],markers[i]['longitud']], {icon: redIcon}).addTo(map);
-    marker.bindPopup("<h5>"+ markers[i]['nombre'] +"</h5><br><h6>"+ markers[i]['descripcion'] +"</h6>");
+    marker.bindPopup("<p class='text-center font-weigth-bold lead'>"+ markers[i]['nombre'] +"</p><br><h6 class=''>"+ markers[i]['descripcion'] +"</h6>");
 }
 
 var popup = L.popup();
@@ -40,3 +40,12 @@ geoLayer.addData(x).addTo(map);
 setTimeout(function () {
     window.dispatchEvent(new Event("resize"));
     }, 500);
+
+function centrarVista(lat, lng){
+    map.setView([lat, lng], 14, {
+        "animate": true,
+        "pan": {
+            "duration": 1,
+        },
+    });
+}

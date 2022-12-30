@@ -16,11 +16,16 @@
     </head>
     <body>
         
-        <div class="container-fluid p-5 row">
+        <div class="container-fluid p-5 row vh-100">
             <div id='map' class="col-xl"></div>
             
             <script>
-                var map = L.map('map').setView([23.2552, -102.1289], 5);
+                var map = L.map('map').setView([23.2552, -102.1289], 5, {
+                    "animate": true,
+                    "pan": {
+                        "duration": 1,
+                    },
+                });
     
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
@@ -57,8 +62,8 @@
                                 <label for="descripcion" class="form-label">Descripcion</label>
                                 <input type="text" class="form-control" id="descripcion" required name="descripcion">
                                 <div id="emailHelp" class="form-text">Descripcion corta del lugar a guardar</div>
-                                <input type="number" step="any" id="latitud" required name="latitud">
-                                <input type="number" step="any" id="longitud" required name="longitud">
+                                <input type="hidden" step="any" id="latitud" required name="latitud">
+                                <input type="hidden" step="any" id="longitud" required name="longitud">
                               </div>
                               <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
@@ -71,13 +76,21 @@
             </div>
     
             <div id="marker-list" class="col-xl">
-                <h1>Map View</h1>
-                <h4>Marcadores activos:</h2>
-                <ul>
+                <div class="text-center">
+                    <h1>Map View</h1>
+                    <h4>Marcadores activos:</h2>
                     {% for marker in markers %}
-                        <li>{{ marker.nombre }} - {{ marker.descripcion }}</li>
+                    <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center w-50">
+                            <div class="card-body w-50 my-3 border border-5 p-3 rounded">
+                                <h5 class="card-title">{{marker.nombre}}</h5>
+                                <p class="card-text">{{marker.descripcion}}</p>
+                                <button type="button" class="btn btn-primary mx-auto" onclick="centrarVista({{marker.latitud}},{{marker.longitud}})">Mostrar</button>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
     </body>
