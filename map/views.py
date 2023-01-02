@@ -27,3 +27,9 @@ def addMarker(request):
     marcador.save()
 
     return redirect(request.META['HTTP_REFERER'])
+
+def removerMarker(request):
+    seleccion = request.POST.get('id', False)
+
+    Marker.objects.filter(id=seleccion).delete()
+    return redirect(request.META['HTTP_REFERER'])
